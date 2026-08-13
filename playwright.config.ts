@@ -33,6 +33,7 @@ export default defineConfig({
 headless: false,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
   },
 
   globalSetup: path.resolve(__dirname, './tests/helpers/global-setup.ts'),
@@ -42,7 +43,12 @@ headless: false,
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: ['--disable-blink-features=AutomationControlled', '--disable-features=IsolateOrigins,site-per-process', '--allow-no-sandbox-job'],
+        },
+      },
     },
 
     // {
