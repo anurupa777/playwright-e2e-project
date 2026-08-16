@@ -1,14 +1,19 @@
-import {test as base} from '@playwright/test'
-export type EnvConfig = {   //EnvConfig is suervaribale given by user
+import { test as base } from "@playwright/test";
 
-envName:string
-appURL: string
-dbConfig: {}
-}
+export type EnvConfig = {
+    envName: string;
+    appURL: string;
+    dbConfig: {};
+    nopCommerceWeb: string;
+    apiURL: string;
+};
 
 export const test = base.extend<EnvConfig>({
-envName: ["test",{"option" :true}],
-appURL: ["<provideURL>",{"option" :true}],
-dbConfig: [{},{"option" :true}]  
-
-})
+    // Define an option and provide a default value.
+    // We can later override it in the config.
+    envName: ["test", { option: true }],
+    appURL: ["<provideURL>", { option: true }],
+    dbConfig: [{}, { option: true }],
+    nopCommerceWeb: ["provideURL", { option: true }],
+    apiURL: ["<provideURL>", { option: true }],
+});
