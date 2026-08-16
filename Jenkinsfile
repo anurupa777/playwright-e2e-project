@@ -13,8 +13,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''
-          set -eu 
+        bat '''
+          // set -eu 
           npm ci
           npx playwright install
         '''
@@ -22,9 +22,9 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh '''
-          export TEST_USER_NAME="$TEST_CREDS_USR"
-          export TEST_PASSWORD="$TEST_CREDS_PSW"
+        bat '''
+          set TEST_USER_NAME=%TEST_CREDS_USR%
+          set TEST_PASSWORD=%TEST_CREDS_PSW%
           npm run test:make-apt
         '''
       }
