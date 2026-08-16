@@ -16,8 +16,10 @@ await log("info","The test is running in Test environment")
 test("Login sucessful", async ({page})=>{
   await page.getByLabel('Username').click();
   await page.getByLabel('Username').fill(process.env.TEST_USERNAME);
+  console.log("Username:", process.env.TEST_USERNAME);
   await page.getByLabel('Password').click();
   await page.getByLabel('Password').fill(process.env.TEST_PASSWORD);
+  console.log("Password:", process.env.TEST_PASSWORD);
   await page.getByRole('button', { name: 'Login' }).click();
 
 
