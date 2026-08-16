@@ -13,8 +13,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat '''
-          // set -eu 
+        bat ''' 
           npm ci
           npx playwright install
         '''
