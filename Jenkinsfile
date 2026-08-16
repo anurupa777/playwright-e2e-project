@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    jdk 'jdk21'
+    
     nodejs 'node26' // Jenkins > Global Tool Config: NodeJS named "node22"
     allure 'allure'// Jenkins > Global Tool Config: Allure named "allure"
     }
