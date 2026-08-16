@@ -1,6 +1,7 @@
 pipeline {
   agent any
-  tools { 
+  tools {
+    jdk 'jdk21'
     nodejs 'node26' // Jenkins > Global Tool Config: NodeJS named "node22"
      allure 'allure'// Jenkins > Global Tool Config: Allure named "allure"
     }
@@ -8,14 +9,16 @@ pipeline {
     timeout(time: 20, unit: 'MINUTES') // To prevent running for long time
   }
   // Binds TEST_CREDS_USR and TEST_CREDS_PSW
-  environment { TEST_CREDS = credentials('e2e-test-user') }
+  environment { TEST_CREDS = credentials('e2e-test-user')
+              PLAYWRIGHT_BROWSERS_PATH = "${WORKSPACE}\\ms-playwright"
+              }
   // -eu: shell safety setting (e -Exit immediately if any command fails; u- Treat unset variables as errors.)
   stages {
     stage('Build') {
       steps {
         bat ''' 
           npm ci
-          npx playwright install
+          npx playwright install chromium
         '''
       }
     }
