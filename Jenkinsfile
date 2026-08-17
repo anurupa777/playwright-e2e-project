@@ -21,7 +21,7 @@ pipeline {
     stage('Test') {
       steps {
         bat '''
-          set TEST_USER_NAME=%TEST_CREDS_USR%
+          set TEST_USERNAME=%TEST_CREDS_USR%
           set TEST_PASSWORD=%TEST_CREDS_PSW%
           npm run test:make-apt
         '''
